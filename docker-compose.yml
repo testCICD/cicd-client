@@ -1,0 +1,15 @@
+version: '3.2'
+services:
+  client:
+    container_name: cts-client
+    image: cts-client:v1
+    links:
+      - server
+    ports:
+      - "3000:3000"
+
+  server:
+    container_name: cts-server
+    image: cts-server:v1
+    ports:
+      - "8080:8080"
