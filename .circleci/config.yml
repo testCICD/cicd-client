@@ -35,6 +35,6 @@ jobs:
               PASSWORD: Password@123
           name: create image
           command: |
-              docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$TAG .      # (3)
+              docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM .      # (3)
               docker login -u $DOCKER_HUB_ACCT -p $PASSWORD       # (4)
-              docker push $BUILD_NAME:$TAG
+              docker push $BUILD_NAME:$CIRCLE_BUILD_NUM
