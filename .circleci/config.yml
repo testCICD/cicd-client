@@ -1,0 +1,40 @@
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.2.1
+
+    working_directory:
+      ~/app
+
+    branches:
+      only:
+        - master
+
+    steps:
+      - checkout
+
+      - save_cache:
+          key: v1-myapp-cache
+          paths:
+              - .node_modules
+
+      - run:
+          name: "install application"
+          command: npm install
+
+      - run:
+          name: "test application"
+          command: npm test
+
+      - setup_remote_docker
+
+      - run:
+          environment:
+              DOCKER_HUB_ACCT: pratikadhau
+              DOCKER_HUB_REPOSITORY: cts-client
+              PASSWORD: Password@123
+          name: create image
+          command:|
+              docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$TAG .      # (3)
+              docker login -u $DOCKER_HUB_ACCT -p $PASSWORD       # (4)
+              docker push $BUILD_NAME:$TAG
