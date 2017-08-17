@@ -29,12 +29,13 @@ jobs:
       - setup_remote_docker
 
       - run:
+          name: "create and push docker image"
           environment:
               DOCKER_HUB_ACCT: pratikadhau
               DOCKER_HUB_REPOSITORY: cts-client
               PASSWORD: Password@123
-          name: create image
           command: |
-              docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM .      # (3)
-              docker login -u $DOCKER_HUB_ACCT -p $PASSWORD # (4)
+              docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM .
+              docker tag  $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
+              docker login -u $DOCKER_HUB_ACCT -p $PASSWORD
               docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM
