@@ -39,3 +39,4 @@ jobs:
               docker tag  $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
               docker login -u $DOCKER_HUB_ACCT -p $PASSWORD
               docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM
+              docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
