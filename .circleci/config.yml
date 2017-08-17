@@ -34,7 +34,7 @@ jobs:
               DOCKER_HUB_REPOSITORY: cts-client
               PASSWORD: Password@123
           name: create image
-          command:|
+          command: |
               docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$TAG .      # (3)
               docker login -u $DOCKER_HUB_ACCT -p $PASSWORD       # (4)
               docker push $BUILD_NAME:$TAG
