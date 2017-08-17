@@ -36,5 +36,5 @@ jobs:
           name: create image
           command: |
               docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM .      # (3)
-              docker login -u $DOCKER_HUB_ACCT -p $PASSWORD       # (4)
-              docker push $BUILD_NAME:$CIRCLE_BUILD_NUM
+              docker login -u $DOCKER_HUB_ACCT -p $PASSWORD # (4)
+              docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM
